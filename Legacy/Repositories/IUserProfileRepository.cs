@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Legacy.Models;
+using System.Collections.Generic;
 
 namespace Legacy.Repositories
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class IUserProfileRepository : ControllerBase
+    public interface IUserProfileRepository
     {
+        List<UserProfile> GetAll();
+        //void Add(UserProfile userProfile);
+        UserProfile GetByFirebaseUserId(string firebaseUserId);
+        UserProfile GetById(int id);
     }
 }
