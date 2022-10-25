@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     getCurrentUserByFirebaseId()?.then((user) => {
-      if (user.userType.name === "Admin") {
+      if (user.userType === "Broker") {
         setIsAdmin(true);
       } else {
         setIsAdmin(false);
