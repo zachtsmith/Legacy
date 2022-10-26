@@ -12,6 +12,7 @@ import { ProductList } from "./ProductList";
 import { ProductDetails } from "./ProductDetails";
 import { ProductForm } from "./ProductForm";
 import { ProductEdit } from "./ProductEdit";
+import { ProductDelete } from "./ProductDelete";
 
 
 
@@ -38,7 +39,7 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
           <Route path="product/details/:productId" element={isLoggedIn ? <ProductDetails /> : <Navigate to="/login" />} />
           <Route path="product/create" element={isLoggedIn ? <ProductForm /> : <Navigate to="/login" />} />
           <Route path="product/:productId" element={isLoggedIn ? <ProductEdit /> : <Navigate to="/login" />} />
-
+          <Route path="product/delete/:productId" element={isLoggedIn ? <ProductDelete /> : <Navigate to="/login" />} />
 
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>

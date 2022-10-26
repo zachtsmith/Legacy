@@ -1,40 +1,39 @@
-
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "reactstrap"
-import { getCarrier } from "../../modules/carrierManager"
+import { getProduct } from "../modules/productManager"
 
 
-export const CarrierDelete = () => {
-    const { carrierId } = useParams()
-    const [carrier, setCarrier] = useState([])
+export const ProductDelete = () => {
+    const { productId } = useParams()
+    const [product, setProduct] = useState([])
     const navigate = useNavigate()
 
-    const getCar = () => {
-        getCarrier(carrierId).then(car => setCarrier(car));
+    const getProd = () => {
+        getProduct(productId).then(prod => setProduct(prod));
     }
     useEffect(
         () => {
-            getCar()
+            getProd()
         },
         []
     )
 
     
     return <>
-        <h2>Are you sure you want to delete {carrier.name} from your list of Carriers?</h2>
+        <h2>Are you sure you want to delete {product.productName} from your list of Products?</h2>
         <Button style={{marginLeft: '3px'}} 
         // className="btn-outline-primary" 
         onClick={() => {
-            fetch(`/api/carrier/delete/${carrierId}`, {
+            fetch(`/api/product/delete/${productId}`, {
                 method: "DELETE",
             })
                 .then(() => {
-                    navigate("/carrier")
+                    navigate("/product")
                 })
         }}>Yes, Delete.</Button> 
         <Button style={{marginLeft: '3px'}}  onClick={() => {
-            navigate("/carrier")
+            navigate("/product")
         }}>Cancel</Button>
     </>
 }
