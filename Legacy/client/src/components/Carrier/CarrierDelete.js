@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "reactstrap"
-import { getCarrier } from "../modules/carrierManager"
+import { getCarrier } from "../../modules/carrierManager"
 
 
 export const CarrierDelete = () => {

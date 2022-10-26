@@ -3,11 +3,11 @@ import { Route, Navigate, Routes } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
-import { CarrierList } from "./CarrierList";
-import { CarrierDetails } from "./CarrierDetails";
-import { CarrierEdit } from "./CarrierEdit";
-import { CarrierForm } from "./CarrierForm";
-import { CarrierDelete } from "./CarrierDelete";
+import { CarrierList } from "./Carrier/CarrierList";
+import { CarrierDetails } from "./Carrier/CarrierDetails";
+import { CarrierEdit } from "./Carrier/CarrierEdit";
+import { CarrierForm } from "./Carrier/CarrierForm";
+import { CarrierDelete } from "./Carrier/CarrierDelete";
 
 
 

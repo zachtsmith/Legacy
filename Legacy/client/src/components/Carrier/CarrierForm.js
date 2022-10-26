@@ -1,40 +1,25 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Button, Card, CardBody, Form, FormGroup, Input, Label } from "reactstrap"
-import { getCarrier } from "../modules/carrierManager"
+import { addCarrier} from "../../modules/carrierManager"
 
-export const CarrierEdit = ({ }) => {
+export const CarrierForm = ({ }) => {
     const navigate = useNavigate()
-    const { carrierId } = useParams()
+
 
     const [carrier, updateCarrier] = useState({
         id: 0,
         name: "",
         phoneNumber: "",
         address: "",
-        logUrl: ""
+        logoUrl: ""
     })
 
-    const getCarriers = () => {
-        getCarrier(carrierId).then(car => updateCarrier(car));
-    }
-    useEffect(
-        () => {
-            getCarriers()
-        },
-        []
-    )
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-        return fetch(`/api/carrier/${carrierId}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(carrier)
-        })
+        return addCarrier(carrier)
             .then(() => {
                 navigate("/carrier")
             })
@@ -42,7 +27,7 @@ export const CarrierEdit = ({ }) => {
 
     }
     return <>
-
+        
         <Card>
             <CardBody>
 
@@ -53,7 +38,9 @@ export const CarrierEdit = ({ }) => {
                             id="carrier"
                             name="carrier"
                             type="text"
+                            placeholder="Carrier Name"
                             value={carrier.name}
+                            style={{marginBottom: '6px'}}
                             onChange={
                                 (evt) => {
                                     const copy = { ...carrier }
@@ -65,6 +52,8 @@ export const CarrierEdit = ({ }) => {
                             id="carrier"
                             name="carrier"
                             type="text"
+                            placeholder="Phone Number xxx-xxx-xxxx"
+                            style={{marginBottom: '6px'}}
                             value={carrier.phoneNumber}
                             onChange={
                                 (evt) => {
@@ -77,11 +66,27 @@ export const CarrierEdit = ({ }) => {
                             id="carrier"
                             name="carrier"
                             type="text"
+                            placeholder="Address"
+                            style={{marginBottom: '6px'}}
                             value={carrier.address}
                             onChange={
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.address = evt.target.value
+                                    updateCarrier(copy)
+                                }
+                            } />
+                            <Input
+                            id="carrier"
+                            name="carrier"
+                            type="text"
+                            placeholder="Company picture"
+                            style={{marginBottom: '6px'}}
+                            value={carrier.logoUrl}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...carrier }
+                                    copy.logoUrl = evt.target.value
                                     updateCarrier(copy)
                                 }
                             } />
