@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button, Card, CardBody, Form, FormGroup, Input, Label } from "reactstrap"
-import { getCarrier } from "../../modules/carrierManager"
+import { getAllCarriers } from "../modules/carrierManager"
 import { getProduct } from "../modules/productManager"
 
 export const ProductEdit = ({ }) => {
     const navigate = useNavigate()
     const { productId } = useParams()
+    const [carriers, setCarriers] = useState([]);
 
     const [product, setProduct] = useState({
         id: 0,
@@ -15,6 +16,15 @@ export const ProductEdit = ({ }) => {
         length: "",
         benefitAmount: 0
     })
+
+
+    const getCarriers = () => {
+        getAllCarriers().then(carriers => setCarriers(carriers));
+    };
+
+    useEffect(() => {
+        getCarriers();
+    }, []);
 
     const getProducts = () => {
         getProduct(productId).then(prod => setProduct(prod));
@@ -50,10 +60,33 @@ export const ProductEdit = ({ }) => {
                 <Form className="ProductForm">
                     <FormGroup>
                         <Label for="name">Product</Label>
+                        <div>
+                        <select
+                            id="product"
+                            name="product"
+                            type="text"
+                            style={{marginBottom: '6px'}}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...product }
+                                    copy.carrierId = parseInt(evt.target.value)
+                                    setProduct(copy)
+                                }
+                            } ><option value={0}> Select Carrier </option>
+                                {carriers.map(
+                                    (carrier, index) => {
+                                        return (<option value={carrier.id} key={index}
+                                        >{carrier?.name}</option>
+                                        )
+                                    })}
+        
+                            </select>
+                            </div>
                         <Input
                             id="product"
                             name="product"
                             type="text"
+                            style={{marginBottom: '6px'}}
                             value={product.productName}
                             onChange={
                                 (evt) => {
@@ -66,6 +99,7 @@ export const ProductEdit = ({ }) => {
                             id="product"
                             name="product"
                             type="text"
+                            style={{marginBottom: '6px'}}
                             value={product.productType}
                             onChange={
                                 (evt) => {
@@ -78,6 +112,7 @@ export const ProductEdit = ({ }) => {
                             id="product"
                             name="product"
                             type="text"
+                            style={{marginBottom: '6px'}}
                             value={product.length}
                             onChange={
                                 (evt) => {
@@ -90,6 +125,7 @@ export const ProductEdit = ({ }) => {
                             id="product"
                             name="product"
                             type="number"
+                            style={{marginBottom: '6px'}}
                             value={product.benefitAmount}
                             onChange={
                                 (evt) => {

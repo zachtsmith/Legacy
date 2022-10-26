@@ -7,8 +7,8 @@ import { addProduct } from "../modules/productManager"
 
 export const ProductForm = ({ }) => {
     const navigate = useNavigate()
-
-
+    
+    
     const [product, setProduct] = useState({
         id: 0,
         carrierId: 0,
@@ -17,7 +17,7 @@ export const ProductForm = ({ }) => {
         length: "",
         benefitAmount: ""
     })
-
+    
     const [carriers, setCarriers] = useState([]);
 
     const getCarriers = () => {
@@ -58,7 +58,7 @@ export const ProductForm = ({ }) => {
                                     copy.carrierId = parseInt(evt.target.value)
                                     setProduct(copy)
                                 }
-                            } ><option value={0}> Select... </option>
+                            } ><option value={0}> Select Carrier </option>
                                 {carriers.map(
                                     (carrier, index) => {
                                         return (<option value={carrier.id} key={index}
