@@ -35,7 +35,10 @@ namespace Legacy.Repositories
                             Carrier = new Carrier()
                             {
                                 Id = DbUtils.GetInt(reader, "CarrierId"),
-                                Name = DbUtils.GetString(reader, "CarrierName")
+                                Name = DbUtils.GetString(reader, "CarrierName"),
+                                PhoneNumber = DbUtils.GetString(reader, "PhoneNumber"),
+                                Address = DbUtils.GetString(reader, "Address"),
+                                LogoUrl = DbUtils.GetString(reader, "LogoUrl")
                             },
                             ProductName = DbUtils.GetString(reader, "ProductName"),
                             ProductType = DbUtils.GetString(reader, "ProductType"),
@@ -61,9 +64,10 @@ namespace Legacy.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, CarrierId, ProductName, ProductType, Length, BenefitAmount
-                        FROM Product
-                        WHERE Id = @id";
+                       SELECT p.Id as ProductId, p.CarrierId as ProdCarrId, p.ProductName, p.ProductType, p.Length, p.BenefitAmount, c.Id AS CarrierId, c.Name as CarrierName, c.PhoneNumber, c.Address, c.logoUrl
+                        FROM Product p 
+                        Left JOIN Carrier c ON p.CarrierId = c.Id
+                                     WHERE p.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -73,12 +77,20 @@ namespace Legacy.Repositories
                         {
                             Product product = new Product()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
+                                Id = DbUtils.GetInt(reader, "ProductId"),
                                 CarrierId = DbUtils.GetInt(reader, "CarrierId"),
                                 ProductName = DbUtils.GetString(reader, "ProductName"),
                                 ProductType = DbUtils.GetString(reader, "ProductType"),
                                 Length = DbUtils.GetString(reader, "Length"),
-                                BenefitAmount = DbUtils.GetInt(reader, "BenefitAmount")
+                                BenefitAmount = DbUtils.GetInt(reader, "BenefitAmount"),
+                                Carrier = new Carrier()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CarrierId"),
+                                    Name = DbUtils.GetString(reader, "CarrierName"),
+                                    PhoneNumber = DbUtils.GetString(reader, "PhoneNumber"),
+                                    Address = DbUtils.GetString(reader, "Address"),
+                                    LogoUrl = DbUtils.GetString(reader, "LogoUrl")
+                                },
                             };
 
                             return product;
@@ -103,10 +115,10 @@ namespace Legacy.Repositories
                     cmd.CommandText = @"
                             UPDATE Product
                             SET 
-                                CarrierId = @name
-                                ProductName = @phoneNumber
-                                ProductType = @address
-                                Length = @logoUrl
+                                CarrierId = @carrierId,
+                                ProductName = @productName,
+                                ProductType = @productType,
+                                Length = @length,
                                 BenefitAmount = @benefitAmount
                             WHERE Id = @id";
 
@@ -116,7 +128,7 @@ namespace Legacy.Repositories
                     DbUtils.AddParameter(cmd, "@productType", product.ProductType);
                     DbUtils.AddParameter(cmd, "@length", product.Length);
                     DbUtils.AddParameter(cmd, "@benefitAmount", product.BenefitAmount);
-
+                    DbUtils.AddParameter(cmd, "@id", product.Id);
 
                     cmd.ExecuteNonQuery();
                 }
