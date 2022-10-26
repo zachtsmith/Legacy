@@ -8,6 +8,7 @@ namespace Legacy.Models
         public string ProductType { get; set; }
         public string Length { get; set; }
         public int BenefitAmount { get; set; }
+        public Carrier Carrier { get; set; }
 
     }
 }
