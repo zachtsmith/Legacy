@@ -21,7 +21,7 @@ namespace Legacy.Repositories
                     cmd.CommandText = @"SELECT p.Id as ProductId, p.CarrierId as ProdCarrId, p.ProductName, p.ProductType, p.Length, p.BenefitAmount, c.Id AS CarrierId, c.Name as CarrierName, c.PhoneNumber, c.Address, c.logoUrl
                         FROM Product p 
                         Left JOIN Carrier c ON p.CarrierId = c.Id
-                                        ORDER BY p.Id";
+                                        ORDER BY c.Name";
                     var reader = cmd.ExecuteReader();
 
                     var products = new List<Product>();
