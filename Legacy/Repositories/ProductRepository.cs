@@ -143,9 +143,9 @@ namespace Legacy.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO Carrier (CarrierId, ProductName, ProductType, Length, BenefitAmount)
+                    INSERT INTO Product (CarrierId, ProductName, ProductType, Length, BenefitAmount)
                     OUTPUT INSERTED.Id
-                    VALUES (@carrierId, @productName, @productType, @lenght, @benefitAmount)";
+                    VALUES (@carrierId, @productName, @productType, @length, @benefitAmount)";
                     DbUtils.AddParameter(cmd, "@carrierId", product.CarrierId);
                     DbUtils.AddParameter(cmd, "@productName", product.ProductName);
                     DbUtils.AddParameter(cmd, "@productType", product.ProductType);

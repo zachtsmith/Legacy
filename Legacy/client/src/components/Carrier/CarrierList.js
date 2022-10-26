@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Table } from "reactstrap";
-import { getAllCarriers } from "../modules/carrierManager";
+import { getAllCarriers } from "../../modules/carrierManager";
 import { Carrier } from "./Carrier";
 export const CarrierList = ({ isAdmin }) => {
     const navigate = useNavigate()
