@@ -53,6 +53,7 @@ export const CarrierEdit = ({ }) => {
                             id="carrier"
                             name="carrier"
                             type="text"
+                            style={{marginBottom: '6px'}}
                             value={carrier.name}
                             onChange={
                                 (evt) => {
@@ -65,6 +66,7 @@ export const CarrierEdit = ({ }) => {
                             id="carrier"
                             name="carrier"
                             type="text"
+                            style={{marginBottom: '6px'}}
                             value={carrier.phoneNumber}
                             onChange={
                                 (evt) => {
@@ -77,6 +79,7 @@ export const CarrierEdit = ({ }) => {
                             id="carrier"
                             name="carrier"
                             type="text"
+                            style={{marginBottom: '6px'}}
                             value={carrier.address}
                             onChange={
                                 (evt) => {
