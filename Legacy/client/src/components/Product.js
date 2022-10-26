@@ -14,7 +14,7 @@ export const Product = ({ product, isAdmin }) => {
     else {
         return <>
         <tr>
-            <td>{product?.name}</td>
+            <td>{product?.productName}</td>
             <td><Link to={`/product/details/${product.id}`}>Product Details</Link></td>
         </tr>
     </>

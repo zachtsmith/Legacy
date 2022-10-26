@@ -10,6 +10,7 @@ import { CarrierForm } from "./Carrier/CarrierForm";
 import { CarrierDelete } from "./Carrier/CarrierDelete";
 import { ProductList } from "./ProductList";
 import { ProductDetails } from "./ProductDetails";
+import { ProductForm } from "./ProductForm";
 
 
 
@@ -34,6 +35,8 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
           <Route path="product" element={isLoggedIn ? <ProductList isAdmin={isAdmin}/> : <Navigate to="/login" />} />
           <Route path="product/details/:productId" element={isLoggedIn ? <ProductDetails /> : <Navigate to="/login" />} />
+          <Route path="product/create" element={isLoggedIn ? <ProductForm /> : <Navigate to="/login" />} />
+
 
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>

@@ -7,7 +7,7 @@ export const CarrierForm = ({ }) => {
     const navigate = useNavigate()
 
 
-    const [carrier, updateCarrier] = useState({
+    const [carrier, setCarrier] = useState({
         id: 0,
         name: "",
         phoneNumber: "",
@@ -45,7 +45,7 @@ export const CarrierForm = ({ }) => {
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.name = evt.target.value
-                                    updateCarrier(copy)
+                                    setCarrier(copy)
                                 }
                             } />
                             <Input
@@ -59,7 +59,7 @@ export const CarrierForm = ({ }) => {
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.phoneNumber = evt.target.value
-                                    updateCarrier(copy)
+                                    setCarrier(copy)
                                 }
                             } />
                             <Input
@@ -73,7 +73,7 @@ export const CarrierForm = ({ }) => {
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.address = evt.target.value
-                                    updateCarrier(copy)
+                                    setCarrier(copy)
                                 }
                             } />
                             <Input
@@ -87,7 +87,7 @@ export const CarrierForm = ({ }) => {
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.logoUrl = evt.target.value
-                                    updateCarrier(copy)
+                                    setCarrier(copy)
                                 }
                             } />
 

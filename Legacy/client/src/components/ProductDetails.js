@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Row } from "reactstrap"
 import { getProductDets } from "../modules/productManager"
-
+import CurrencyFormat from 'react-currency-format';
 export const ProductDetails = () => {
     const { productId } = useParams()
     const [product, setProduct] = useState()
@@ -24,10 +24,10 @@ export const ProductDetails = () => {
                 <Col >
                     <CardImg top width="50%" src={product?.carrier?.logoUrl} alt="Card image cap" />
                     <CardBody>
-                        <CardTitle><strong>{product?.productName}</strong></CardTitle>
+                        <CardTitle><h3>{product?.productName}</h3></CardTitle>
                         <CardText>Type: {product?.productType}</CardText>
                         <CardText>Length: {product?.length} (years)</CardText>
-                        <CardText><CurrencyFormat> Benefit Amount: {product?.benefitAmount}</CurrencyFormat></CardText>
+                        <CardText>Benefit Amount: <CurrencyFormat value={product?.benefitAmount} displayType={'text'} thousandSeparator={true} prefix={'$'}/></CardText>
                         <CardText>Carrier: {product?.carrier.name}</CardText>
                     </CardBody>
                 </Col>

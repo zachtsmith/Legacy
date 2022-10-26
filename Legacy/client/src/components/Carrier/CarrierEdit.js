@@ -7,7 +7,7 @@ export const CarrierEdit = ({ }) => {
     const navigate = useNavigate()
     const { carrierId } = useParams()
 
-    const [carrier, updateCarrier] = useState({
+    const [carrier, setCarrier] = useState({
         id: 0,
         name: "",
         phoneNumber: "",
@@ -16,7 +16,7 @@ export const CarrierEdit = ({ }) => {
     })
 
     const getCarriers = () => {
-        getCarrier(carrierId).then(car => updateCarrier(car));
+        getCarrier(carrierId).then(car => setCarrier(car));
     }
     useEffect(
         () => {
@@ -58,7 +58,7 @@ export const CarrierEdit = ({ }) => {
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.name = evt.target.value
-                                    updateCarrier(copy)
+                                    setCarrier(copy)
                                 }
                             } />
                             <Input
@@ -70,7 +70,7 @@ export const CarrierEdit = ({ }) => {
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.phoneNumber = evt.target.value
-                                    updateCarrier(copy)
+                                    setCarrier(copy)
                                 }
                             } />
                             <Input
@@ -82,7 +82,7 @@ export const CarrierEdit = ({ }) => {
                                 (evt) => {
                                     const copy = { ...carrier }
                                     copy.address = evt.target.value
-                                    updateCarrier(copy)
+                                    setCarrier(copy)
                                 }
                             } />
 
