@@ -8,6 +8,8 @@ import { CarrierDetails } from "./Carrier/CarrierDetails";
 import { CarrierEdit } from "./Carrier/CarrierEdit";
 import { CarrierForm } from "./Carrier/CarrierForm";
 import { CarrierDelete } from "./Carrier/CarrierDelete";
+import { ProductList } from "./ProductList";
+import { ProductDetails } from "./ProductDetails";
 
 
 
@@ -23,11 +25,16 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
           /> 
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+
           <Route path="carrier" element={isLoggedIn ? <CarrierList isAdmin={isAdmin}/> : <Navigate to="/login" />} />
           <Route path="carrier/create" element={isLoggedIn ? <CarrierForm /> : <Navigate to="/login" />} />
           <Route path="carrier/details/:carrierId" element={isLoggedIn ? <CarrierDetails /> : <Navigate to="/login" />} />
           <Route path="carrier/:carrierId" element={isLoggedIn ? <CarrierEdit /> : <Navigate to="/login" />} />
           <Route path="carrier/delete/:carrierId" element={isLoggedIn ? <CarrierDelete /> : <Navigate to="/login" />} />
+
+          <Route path="product" element={isLoggedIn ? <ProductList isAdmin={isAdmin}/> : <Navigate to="/login" />} />
+          <Route path="product/details/:productId" element={isLoggedIn ? <ProductDetails /> : <Navigate to="/login" />} />
+
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
       </Routes>
