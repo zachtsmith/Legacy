@@ -45,3 +45,12 @@ export const getUserProfile = (userId) => {
     return fetch(`${apiUrl}/details/${userId}`)
         .then((res) => res.json())
 }
+
+// export const getCarrier = (carrierId) => {
+//     return fetch(baseUrl + `/${carrierId}`)
+//         .then((res) => res.json())
+// }
+export const getUserHealth = (userId) => {
+    return fetch(`${apiUrl}/:${userId}`)
+        .then((res) => res.json())
+}

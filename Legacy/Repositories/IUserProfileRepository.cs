@@ -6,8 +6,9 @@ namespace Legacy.Repositories
     public interface IUserProfileRepository
     {
         List<UserProfile> GetAll();
-        //void Add(UserProfile userProfile);
+        void Add(UserProfile userProfile);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         UserProfile GetById(int id);
+        void UpdateUser(UserProfile userProfile);
     }
 }

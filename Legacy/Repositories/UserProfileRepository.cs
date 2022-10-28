@@ -20,7 +20,7 @@ namespace Legacy.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                         SELECT up.Id, up.FirebaseUserId, up.Name, up.UserType, up.Weight, up.Age, up.IsDiabetic, up.IsSmoker, up.Medications, up.Email 
+                         SELECT up.Id, up.FirebaseUserId, up.Name, up.UserType, up.Weight, up.Age, up.IsDiabetic, up.IsSmoker, up.Medications, up.Email, up.UserTypeId, up.ImageLocation 
                             FROM UserProfiles up Order by up.Name
                     ";
 
@@ -38,8 +38,9 @@ namespace Legacy.Repositories
                                 Email = DbUtils.GetString(reader, "Email"),
                                 Weight = DbUtils.GetNullableInt(reader, "Weight"),
                                 Age = DbUtils.GetNullableInt(reader, "Age"),
-                                //UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                                UserType = DbUtils.GetString(reader, "UserType")
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                UserType = DbUtils.GetString(reader, "UserType"),
+                                ImageLocation = DbUtils.GetString(reader, "ImageLocation")
                             };
                             userProfiles.Add(userProfile);
                         }
@@ -58,7 +59,7 @@ namespace Legacy.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, up.FirebaseUserId, up.Name, up.UserType, up.Weight, up.Age, up.IsDiabetic, up.IsSmoker, up.Medications, up.Email 
+                        SELECT up.Id, up.FirebaseUserId, up.Name, up.UserType, up.Weight, up.Age, up.IsDiabetic, up.IsSmoker, up.Medications, up.Email, up.UserTypeId, up.ImageLocation 
                             FROM UserProfiles up
                          WHERE FirebaseUserId = @FirebaseuserId";
 
@@ -77,8 +78,9 @@ namespace Legacy.Repositories
                             Email = DbUtils.GetString(reader, "Email"),
                             Weight = DbUtils.GetNullableInt(reader, "Weight"),
                             Age = DbUtils.GetNullableInt(reader, "Age"),
-                            //UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                            UserType = DbUtils.GetString(reader, "UserType")
+                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                            UserType = DbUtils.GetString(reader, "UserType"),
+                            ImageLocation = DbUtils.GetString(reader, "ImageLocation")
                         };
                     }
                     reader.Close();
@@ -96,7 +98,7 @@ namespace Legacy.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                         SELECT up.Id, up.FirebaseUserId, up.Name, up.UserType, up.Weight, up.Age, up.IsDiabetic, up.IsSmoker, up.Medications, up.Email 
+                         SELECT up.Id, up.FirebaseUserId, up.Name, up.UserType, up.Weight, up.Age, up.IsDiabetic, up.IsSmoker, up.Medications, up.Email, up.UserTypeId, up.ImageLocation  
                             FROM UserProfiles up
                         WHERE up.Id = @Id";
                     DbUtils.AddParameter(cmd, "@Id", id);
@@ -116,8 +118,9 @@ namespace Legacy.Repositories
                                     Weight = DbUtils.GetNullableInt(reader, "Weight"),
                                     Age = DbUtils.GetNullableInt(reader, "Age"),
                                     Medications = DbUtils.GetString(reader, "Medications"),
-                                    //UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                                    UserType = DbUtils.GetString(reader, "UserType")
+                                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                    UserType = DbUtils.GetString(reader, "UserType"),
+                                    ImageLocation = DbUtils.GetString(reader, "ImageLocation")
                                 };
                             }
 
@@ -127,26 +130,57 @@ namespace Legacy.Repositories
                 }
             }
         }
-        //public void Add(UserProfile userProfile)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-        //                                                         Email, CreateDateTime, ImageLocation, UserTypeId)
-        //                                OUTPUT INSERTED.ID
-        //                                VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-        //                                        @Email, @CreateDateTime, @ImageLocation, @UserTypeId)";
-        //            DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
-        //            DbUtils.AddParameter(cmd, "@DisplayName", userProfile.Name);
-        //            DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-        //            DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+        public void Add(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO UserProfiles (FirebaseUserId, Name, 
+                                                                 Email, UserType, UserTypeId, ImageLocation)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@FirebaseUserId, @Name, 
+                                                @Email, @UserType, @UserTypeId, @ImageLocation)";
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@Name", userProfile.Name);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@UserType", userProfile.UserType);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", userProfile.ImageLocation);
 
-        //            userProfile.Id = (int)cmd.ExecuteScalar();
-        //        }
-        //    }
-        //}
+                    userProfile.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void UpdateUser(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE UserProfiles 
+                                SET 
+                                Weight = @weight,
+                                Age = @age,
+                                IsDiabetic = @isDiabetic,
+                                IsSmoker = @isSmoker,
+                                Medications = @medications
+                            WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@weight", userProfile.Weight);
+                    DbUtils.AddParameter(cmd, "@age", userProfile.Age);
+                    DbUtils.AddParameter(cmd, "@isDiabetic", userProfile.isDiabetic);
+                    DbUtils.AddParameter(cmd, "@isSmoker", userProfile.isSmoker);
+                    DbUtils.AddParameter(cmd, "@Medications", userProfile.Medications);
+                    DbUtils.AddParameter(cmd, "@id", userProfile.Id);
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+       
     }
 }

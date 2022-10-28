@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [isAdmin, setIsAdmin] = useState();
+  const [isBroker, setIsBroker] = useState();
 
   useEffect(() => {
     onLoginStatusChange(setIsLoggedIn)
@@ -20,9 +20,9 @@ function App() {
   useEffect(() => {
     getCurrentUserByFirebaseId()?.then((user) => {
       if (user.userType === "Broker") {
-        setIsAdmin(true);
+        setIsBroker(true);
       } else {
-        setIsAdmin(false);
+        setIsBroker(false);
       }
     });
   }, [isLoggedIn])
@@ -34,8 +34,8 @@ if (isLoggedIn === null) {
 
 return (
   <Router>
-    <Header isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
-    <ApplicationViews isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
+    <Header isLoggedIn={isLoggedIn} isBroker={isBroker}/>
+    <ApplicationViews isLoggedIn={isLoggedIn} isBroker={isBroker}/>
   </Router>
 );
 

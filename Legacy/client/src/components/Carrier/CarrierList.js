@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Table } from "reactstrap";
 import { getAllCarriers } from "../../modules/carrierManager";
 import { Carrier } from "./Carrier";
-export const CarrierList = ({ isAdmin }) => {
+export const CarrierList = ({ isBroker }) => {
     const navigate = useNavigate()
     const [carriers, setCarriers] = useState([]);
 
@@ -29,11 +29,11 @@ export const CarrierList = ({ isAdmin }) => {
                     </thead>
                     <tbody>
                         {carriers.map((car) => (
-                            <Carrier carrier={car} key={car.id} isAdmin={isAdmin} />
+                            <Carrier carrier={car} key={car.id} isBroker={isBroker} />
                         ))}
                     </tbody>
-                </Table>
-                <Button onClick={() => navigate("/carrier/create")}>Add new Carrier</Button>
+                </Table>{isBroker === true ?
+                <Button onClick={() => navigate("/product/create")}>Add new Carrier</Button> : ""}
             </div>
         </div>
     );

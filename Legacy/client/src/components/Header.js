@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 import { logout } from '../modules/authManager';
 
-export default function Header({ isLoggedIn, isAdmin }) {
+export default function Header({ isLoggedIn, isBroker }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -33,6 +33,15 @@ export default function Header({ isLoggedIn, isAdmin }) {
               </NavItem>
               <NavItem>
                 <NavLink tag={RRNavLink} to="/product">Products</NavLink>
+              </NavItem>
+              <NavItem>
+              {isBroker === true ?
+                <NavLink tag={RRNavLink} to="/profiles">Clients</NavLink>
+              : <NavLink tag={RRNavLink} to="/profiles">Brokers</NavLink> }
+              </NavItem>
+              <NavItem>
+                {isBroker === true ? "" :
+                <NavLink tag={RRNavLink} to="/profiles/health">HealthForm</NavLink>}
               </NavItem>
 
               

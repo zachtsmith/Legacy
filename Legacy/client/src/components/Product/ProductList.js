@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Table } from "reactstrap";
-import { getAllProducts } from "../modules/productManager";
+import { getAllProducts } from "../../modules/productManager";
 import { Product } from "./Product";
 
-export const ProductList = ({ isAdmin }) => {
+export const ProductList = ({ isBroker }) => {
     const navigate = useNavigate()
     const [products, setProducts] = useState([]);
 
@@ -19,7 +19,11 @@ export const ProductList = ({ isAdmin }) => {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <h3>List of Products</h3>
+                <div style={{ display: 'flex' }}><h3>List of Products</h3>
+                
+                {isBroker === true ?
+                            <Button  style={{ marginLeft: "auto" }} onClick={() => navigate("/product/create")}>Add new Product</Button> : ""}
+                </div>
                 <Table>
                     <thead>
                         <tr>
@@ -30,11 +34,10 @@ export const ProductList = ({ isAdmin }) => {
                     </thead>
                     <tbody>
                         {products.map((prod) => (
-                            <Product product={prod} key={prod.id} isAdmin={isAdmin} />
-                        ))}
+                            <Product product={prod} key={prod.id} isBroker={isBroker} />
+                            ))}
                     </tbody>
-                </Table>
-                <Button onClick={() => navigate("/product/create")}>Add new Product</Button>
+                            </Table> 
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "reactstrap"
-import { getProduct } from "../modules/productManager"
+import { getProduct } from "../../modules/productManager"
 
 
 export const ProductDelete = () => {

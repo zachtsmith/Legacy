@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const Product = ({ product, isAdmin }) => {
-   if (isAdmin == true){
+export const Product = ({ product, isBroker }) => {
+   if (isBroker == true){
    return <>
         <tr>
             <td>{product?.productName}</td>

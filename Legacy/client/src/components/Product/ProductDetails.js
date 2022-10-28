@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Row } from "reactstrap"
-import { getProductDets } from "../modules/productManager"
+import { getProductDets } from "../../modules/productManager"
 import CurrencyFormat from 'react-currency-format';
 export const ProductDetails = () => {
     const { productId } = useParams()

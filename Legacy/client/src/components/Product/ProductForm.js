@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Card, CardBody, Form, FormGroup, Input, Label } from "reactstrap"
-import { getAllCarriers } from "../modules/carrierManager"
-import { addProduct } from "../modules/productManager"
+import { getAllCarriers } from "../../modules/carrierManager"
+import { addProduct } from "../../modules/productManager"
 
 
 export const ProductForm = ({ }) => {
@@ -46,7 +46,8 @@ export const ProductForm = ({ }) => {
 
                 <Form className="productForm">
                     <FormGroup>
-                        <Label for="name"><h3>New Product</h3></Label><div>
+                        <Label for="name"><h3>New Product</h3></Label>
+                        <div>
                         <select
                             id="product"
                             name="product"
@@ -114,7 +115,7 @@ export const ProductForm = ({ }) => {
                             id="product"
                             name="product"
                             type="number"
-                            placeholder="Benefit Amount (values only) ex. $100,000 = 100000"
+                            placeholder="Benefit Amount (values only) ex. 10000 = $10,000"
                             style={{marginBottom: '6px'}}
                             value={product.benefitAmount}
                             onChange={

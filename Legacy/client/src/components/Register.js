@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 import { register } from "../modules/authManager";
+import { getAllUserTypes } from "../modules/userTypeManager";
+
+
+
+
 
 export default function Register() {
   const navigate = useNavigate();
 
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [displayName, setDisplayName] = useState();
+ 
+  const [Name, setName] = useState();
   const [email, setEmail] = useState();
   const [imageLocation, setImageLocation] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [userTypeName, setUserTypeName] = useState([]);
+  const [userType, setUserType] = useState();
+
+  const getUserType = () => {
+    getAllUserTypes().then(userTypes => setUserTypeName(userTypes));
+};
+
+useEffect(() => {
+    getUserType();
+}, []);
 
   const registerClick = (e) => {
     e.preventDefault();
@@ -20,11 +34,10 @@ export default function Register() {
       alert("Passwords don't match. Do better.");
     } else {
       const userProfile = {
-        firstName,
-        lastName,
-        displayName,
+        Name,
         imageLocation,
         email,
+        userType,
       };
       register(userProfile, password).then(() => navigate("/"));
     }
@@ -34,28 +47,37 @@ export default function Register() {
     <Form onSubmit={registerClick}>
       <fieldset>
         <FormGroup>
-          <Label htmlFor="firstName">First Name</Label>
+          <Label htmlFor="Name">Name</Label>
           <Input
-            id="firstName"
+            id="Name"
             type="text"
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="lastName">Last Name</Label>
-          <Input
-            id="lastName"
-            type="text"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="displayName">Display Name</Label>
-          <Input
-            id="displayName"
-            type="text"
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
+          <Label htmlFor="userType">UserType</Label>
+          <div>
+          <select
+              id="userType"
+              name="userType"
+              type="text"
+              style={{marginBottom: '6px'}}
+              onChange={
+                  (evt) => {
+                      let copy = { ...userType }
+                      copy = (evt.target.value)
+                      setUserType(copy)
+                  }
+              } ><option value={0}> Select User Type </option>
+                  {userTypeName.map(
+                      (userType, index) => {
+                          return (<option value={userType.name} key={index}
+                          >{userType?.name}</option>
+                          )
+                      })}
+
+          </select>
+          </div>
         </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>

@@ -30,7 +30,6 @@ export const CarrierForm = ({ }) => {
         
         <Card>
             <CardBody>
-
                 <Form className="carrierForm">
                     <FormGroup>
                         <Label for="name">Carrier</Label>
