@@ -40,6 +40,7 @@ namespace Legacy
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<ICarrierRepository, CarrierRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IUserTypeRepository, UserTypeRepository>();
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services

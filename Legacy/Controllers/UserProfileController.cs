@@ -51,16 +51,30 @@ namespace Legacy.Controllers
             }
             return Ok(userProfile);
         }
-        //[HttpPost]
-        //public IActionResult Post(UserProfile userProfile)
-        //{
+        [HttpPost]
+        public IActionResult Post(UserProfile userProfile)
+        {
+            if (userProfile.UserType == "Client") { userProfile.UserTypeId = UserType.CLIENT_ID; }
+            else {
+                userProfile.UserTypeId = UserType.BROKER_ID; }
+                _userProfileRepository.Add(userProfile);
+                return CreatedAtAction(
+                    nameof(GetUserProfile),
+                    new { firebaseUserId = userProfile.FirebaseUserId },
+                    userProfile);
             
-        //    userProfile.UserTypeId = UserType.AUTHOR_ID;
-        //    _userProfileRepository.Add(userProfile);
-        //    return CreatedAtAction(
-        //        nameof(GetUserProfile),
-        //        new { firebaseUserId = userProfile.FirebaseUserId },
-        //        userProfile);
-        //}
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, UserProfile userProfile)
+        {
+            if (id != userProfile.Id)
+            {
+                return BadRequest();
+            }
+
+            _userProfileRepository.UpdateUser(userProfile);
+            return NoContent();
+        }
     }
 }

@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
 
+
 export default function Login() {
   const navigate = useNavigate();
 
@@ -16,33 +17,37 @@ export default function Login() {
       .catch(() => alert("Invalid email or password"));
   };
 
-  return (
-    <Form onSubmit={loginSubmit}>
-      <fieldset>
-        <FormGroup>
-          <Label for="email">Email</Label>
+  return (<div className="center">
+
+    <Form onSubmit={loginSubmit} >
+      <fieldset >
+        <FormGroup >
+          <Label for="email" className="white-text">Email</Label>
           <Input
-            id="email"
-            type="text"
-            autoFocus
-            onChange={(e) => setEmail(e.target.value)}
+          style={{ width:"300px" }}
+          id="email"
+          type="text"
+          autoFocus
+          onChange={(e) => setEmail(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="password">Password</Label>
+          <Label for="password" className="white-text">Password</Label>
           <Input
-            id="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
+          style={{ width:"300px" }}
+          id="password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
           <Button>Login</Button>
         </FormGroup>
-        <em>
-          Not registered? <Link to="register">Register</Link>
+        <em className="white-text-2">
+          Not registered? <Link to="../register">Register</Link>
         </em>
       </fieldset>
     </Form>
+          </div>
   );
 }

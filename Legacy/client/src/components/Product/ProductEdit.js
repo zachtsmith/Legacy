@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button, Card, CardBody, Form, FormGroup, Input, Label } from "reactstrap"
-import { getAllCarriers } from "../modules/carrierManager"
-import { getProduct } from "../modules/productManager"
+import { getAllCarriers } from "../../modules/carrierManager"
+import { getProduct } from "../../modules/productManager"
 
 export const ProductEdit = ({ }) => {
     const navigate = useNavigate()

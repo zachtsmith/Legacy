@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Legacy.Models
 {
     public class UserProfile
@@ -6,6 +8,9 @@ namespace Legacy.Models
         public string Name { get; set; }
         public string FirebaseUserId { get; set; }
         public string Email { get; set; }
+        [DataType(DataType.Url)]
+        [MaxLength(255)]
+        public string ImageLocation { get; set; }
         public int UserTypeId { get; set; }
         public string UserType { get; set; }
         public int? Weight { get; set; }

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using Legacy.Models;
 using Legacy.Utils;
-using Tabloid.Repositories;
+using Legacy.Repositories;
 
 namespace Legacy.Repositories
 {
@@ -18,9 +18,12 @@ namespace Legacy.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Name, PhoneNumber, Address, LogoUrl 
-                                        FROM Carrier 
-                                        ORDER BY Name";
+                    cmd.CommandText = @"SELECT c.Id, c.Name, c.PhoneNumber, c.Address, c.LogoUrl, upc.Id as UPCid,                              upc.CarrierId, upc.UserId
+                                        FROM Carrier c
+                                        Left JOIN UserProfileCarriers  upc ON c.Id = upc.CarrierId
+                                        Order by c.Name
+                                       ";
+                  
                     var reader = cmd.ExecuteReader();
 
                     var carriers = new List<Carrier>();
@@ -33,7 +36,14 @@ namespace Legacy.Repositories
                             Name = DbUtils.GetString(reader, "Name"),
                             PhoneNumber = DbUtils.GetString(reader, "PhoneNumber"),
                             Address = DbUtils.GetString(reader, "Address"),
-                            LogoUrl = DbUtils.GetString(reader, "LogoUrl")
+                            LogoUrl = DbUtils.GetString(reader, "LogoUrl"),
+                            UserProfileCarrier = new UserProfileCarriers()
+                            {
+                                Id = DbUtils.GetNullableInt(reader, "UPCid"),
+                                UserId = DbUtils.GetNullableInt(reader, "UserId"),
+                                CarrierId = DbUtils.GetNullableInt(reader, "CarrierId")
+                            }
+
                         });
                     }
 
@@ -132,6 +142,21 @@ namespace Legacy.Repositories
 
                     int newlyCreatedId = (int)cmd.ExecuteScalar();
                     carrier.Id = newlyCreatedId;
+
+                    cmd.CommandText = @"
+                    INSERT INTO UserProfileCarriers (UserId, CarrierId)
+                    OUTPUT INSERTED.Id
+                    VALUES (@userId, @carrierId)";
+                   
+                    DbUtils.AddParameter(cmd, "@userProfileCarrierId", carrier.UserProfileCarrier.Id);
+                    DbUtils.AddParameter(cmd, "@userId", carrier.UserProfileCarrier.UserId);
+                    DbUtils.AddParameter(cmd, "@carrierId", carrier.Id);
+                    
+
+                    int newlyCreatedUserProfileCarrierId = (int)cmd.ExecuteScalar();
+                    carrier.UserProfileCarrier.Id = newlyCreatedUserProfileCarrierId;
+
+
                 }
             }
         }
