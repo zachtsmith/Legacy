@@ -63,7 +63,8 @@ export const UserEdit = ({ }) => {
                                     copy.weight = evt.target.value
                                     setUserProfile(copy)
                                 }
-                            } />
+                            } 
+                            />
                              <Label for="Age">Age:</Label>
                         <Input
                             id="userHealth"
@@ -80,7 +81,7 @@ export const UserEdit = ({ }) => {
                                 }
                             } />
                             <Label for="isDiabetic">Are you diabetic?</Label>
-                        <Input
+                        {/* <Input
                             id="userHealth"
                             name="userHealth"
                             type="radio"
@@ -91,21 +92,50 @@ export const UserEdit = ({ }) => {
                                     const copy = { ...userProfile }
                                     copy.isDiabetic = evt.target.value
                                     setUserProfile(copy)
-                                }
-                            } />
+                                } */}
+                            <div>
+                            <label>
+                                <input 
+                                    type="radio" 
+                                    name="isPublished" 
+                                     value="true"
+                                     checked={userProfile.isDiabetic === true}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...userProfile }
+                                            copy.isDiabetic = evt.target.value
+                                            setUserProfile(copy)
+                                    }} />
+                                        Yes
+                            </label>
+                            </div>
+                            <div className="radio">
+                            <label>
+                            <input 
+                                    type="radio" 
+                                    name="isPublished" 
+                                    value="false"
+                                   checked={userProfile.isDiabetic === false}
+                                    onChange={(evt) => {
+                                        const copy = { ...userProfile }
+                                        copy.isDiabetic = evt.target.value
+                                        setUserProfile(copy)
+                                }} />
+                                         No
+                            </label></div>
                             <Label for="isSmoker">Are you a smoker?</Label>
                         <Input
-                            id="userHealth"
-                            name="userHealth"
-                            type="text"
-                            placeholder="Weight"
-                            value={userProfile.weight}
-                            style={{marginBottom: '6px'}}
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...userProfile }
-                                    copy.weight = evt.target.value
-                                    setUserProfile(copy)
+                        id="userHealth"
+                        name="userHealth"
+                        type="text"
+                        placeholder="Weight"
+                        value={userProfile.weight}
+                        style={{marginBottom: '6px'}}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...userProfile }
+                                copy.weight = evt.target.value
+                                setUserProfile(copy)
                                 }
                             } />
                             <Label for="medications">Please list all of your medications.</Label>

@@ -1,11 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Table } from "reactstrap";
+import App from "../../App";
 import { getAllCarriers } from "../../modules/carrierManager";
 import { Carrier } from "./Carrier";
-export const CarrierList = ({ isBroker }) => {
+import '../../App.css'
+import { getUserProfile } from "../../modules/userProfileManager";
+
+
+export const CarrierList = ({ isBroker, user }) => {
     const navigate = useNavigate()
-    const [carriers, setCarriers] = useState([]);
+    // const { profileId } = useParams()
+    const [carrier, setCarriers] = useState([]);
+    
+    // const [user, setUser] = useState()
+    // const getUser = () => {
+    //     getUserProfile(profileId).then((u) => setUser(u))
+    // }
+
+    // useEffect(
+    //     () => {
+    //         getUser()
+    //     },
+    //     []
+    // )
+   
 
     const getCarriers = () => {
         getAllCarriers().then(carriers => setCarriers(carriers));
@@ -16,10 +35,12 @@ export const CarrierList = ({ isBroker }) => {
     }, []);
 
     return (
+
         <div className="container">
             <div className="row justify-content-center">
+                <div className="white-text">
                 <h3>CARRIERS</h3>
-                <Table>
+                <Table >
                     <thead>
                         <tr>
                             <th></th>
@@ -27,14 +48,17 @@ export const CarrierList = ({ isBroker }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {carriers.map((car) => (
-                            <Carrier carrier={car} key={car.id} isBroker={isBroker} />
-                        ))}
+                    <tbody className="white-text"> 
+                    
+                        {carrier.map((car) => {if (car.userProfileCarrier.userId === user.id) {
+
+                            return <><Carrier carrier={car} key={car.userProfileCarrier.id} isBroker={isBroker} /></>
+                        }})}
                     </tbody>
                 </Table>{isBroker === true ?
-                <Button onClick={() => navigate("/product/create")}>Add new Carrier</Button> : ""}
+                <Button onClick={() => navigate("/carrier/create")}>Add new Carrier</Button> : ""}
             </div>
+        </div>
         </div>
     );
 }

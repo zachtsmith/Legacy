@@ -8,5 +8,7 @@ namespace Legacy.Models
         public string Address { get; set; }
         public string LogoUrl { get; set; }
 
+        public UserProfileCarriers UserProfileCarrier { get; set; }    
+
     }
 }

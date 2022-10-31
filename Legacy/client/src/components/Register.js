@@ -43,19 +43,21 @@ useEffect(() => {
     }
   };
 
-  return (
+  return (<div className="center">
+
     <Form onSubmit={registerClick}>
       <fieldset>
         <FormGroup>
-          <Label htmlFor="Name">Name</Label>
+          <Label htmlFor="Name" className="white-text-3">Name</Label>
           <Input
+            style={{ width:"300px" }}
             id="Name"
             type="text"
             onChange={(e) => setName(e.target.value)}
-          />
+            />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="userType">UserType</Label>
+          <Label htmlFor="userType" className="white-text-3">UserType</Label>
           <div>
           <select
               id="userType"
@@ -64,57 +66,58 @@ useEffect(() => {
               style={{marginBottom: '6px'}}
               onChange={
                   (evt) => {
-                      let copy = { ...userType }
-                      copy = (evt.target.value)
-                      setUserType(copy)
+                    let copy = { ...userType }
+                    copy = (evt.target.value)
+                    setUserType(copy)
                   }
-              } ><option value={0}> Select User Type </option>
+                } ><option value={0}> Select User Type </option>
                   {userTypeName.map(
-                      (userType, index) => {
-                          return (<option value={userType.name} key={index}
-                          >{userType?.name}</option>
-                          )
+                    (userType, index) => {
+                      return (<option value={userType.name} key={index}
+                        >{userType?.name}</option>
+                        )
                       })}
 
           </select>
           </div>
         </FormGroup>
         <FormGroup>
-          <Label for="email">Email</Label>
+          <Label for="email" className="white-text-3">Email</Label>
           <Input
             id="email"
             type="text"
             onChange={(e) => setEmail(e.target.value)}
-          />
+            />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="imageLocation">Profile Image URL</Label>
+          <Label htmlFor="imageLocation" className="white-text-3">Profile Image URL</Label>
           <Input
             id="imageLocation"
             type="text"
             onChange={(e) => setImageLocation(e.target.value)}
-          />
+            />
         </FormGroup>
         <FormGroup>
-          <Label for="password">Password</Label>
+          <Label for="password" className="white-text-3">Password</Label>
           <Input
             id="password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
-          />
+            />
         </FormGroup>
         <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
+          <Label for="confirmPassword" className="white-text-3">Confirm Password</Label>
           <Input
             id="confirmPassword"
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+            />
         </FormGroup>
         <FormGroup>
           <Button>Register</Button>
         </FormGroup>
       </fieldset>
     </Form>
+            </div>
   );
 }

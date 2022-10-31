@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+
+.white-text {
+  color: white;
+  font-size: large;
+}
+
+.white-text-2 {
+  color: white;
+  font-size: medium;
+}
+
+.white-text-end {
+  color: white;
+  font-size: large;
+  padding-left: 1%;
+  justify-content: end;
+  align-items:flex-end;
+  white-space: nowrap;
+}
+
+
+.background {
+  background-image: url("https://media.istockphoto.com/photos/yellow-ginkgo-trees-on-road-lane-in-napa-valley-california-picture-id499046284?b=1&k=20&m=499046284&s=170667a&w=0&h=x2vnT4nZt8ehYOfN0g10fdoydfMAur6APeNlCWQUHCI=");
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center ;
+  background-repeat: no-repeat;
+  background-size:cover;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: scroll;
+
+}
+
+body, html {
+  height: 100%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;  
+}
+
+.center-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;  
+  color: white;
+  font-size:larger
+}

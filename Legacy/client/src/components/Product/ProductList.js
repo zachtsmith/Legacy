@@ -19,12 +19,12 @@ export const ProductList = ({ isBroker }) => {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <div style={{ display: 'flex' }}><h3>List of Products</h3>
+                <div style={{ display: 'flex' }} className="white-text"><h3>List of Products</h3>
                 
                 {isBroker === true ?
                             <Button  style={{ marginLeft: "auto" }} onClick={() => navigate("/product/create")}>Add new Product</Button> : ""}
                 </div>
-                <Table>
+                <Table className="white-text">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -32,7 +32,7 @@ export const ProductList = ({ isBroker }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="white-text">
                         {products.map((prod) => (
                             <Product product={prod} key={prod.id} isBroker={isBroker} />
                             ))}

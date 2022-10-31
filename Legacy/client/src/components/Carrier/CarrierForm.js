@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Card, CardBody, Form, FormGroup, Input, Label } from "reactstrap"
 import { addCarrier} from "../../modules/carrierManager"
 
-export const CarrierForm = ({ }) => {
+export const CarrierForm = ({ user }) => {
     const navigate = useNavigate()
 
 
@@ -12,8 +12,16 @@ export const CarrierForm = ({ }) => {
         name: "",
         phoneNumber: "",
         address: "",
-        logoUrl: ""
+        logoUrl: "",
+        userProfileCarrier: {
+            id: 0,
+            userId: user.id,
+            carrierId: 0
+        }
+        
     })
+
+   
 
 
     const handleSaveButtonClick = (event) => {

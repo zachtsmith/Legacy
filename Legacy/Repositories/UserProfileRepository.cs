@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using Legacy.Models;
 using Legacy.Utils;
-using Tabloid.Repositories;
+using Legacy.Repositories;
 
 namespace Legacy.Repositories
 {

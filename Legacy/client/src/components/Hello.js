@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getCurrentUserByFirebaseId, getUserProfile } from "../modules/userProfileManager";
 import { UserDetails } from "./UserDetails";
-
+import "../App.css"
 export default function Hello() {
   
   
@@ -28,13 +28,6 @@ export default function Hello() {
   }, [])
 
   return (
-    <span style={{
-      position: "fixed",
-      left: 0,
-      right: 0,
-      top: "50%",
-      marginTop: "-0.5rem",
-      textAlign: "center",
-    }}>Hello {userProfile.name}</span>
+    <div className="center-1" ><h1>Hello {[...userProfile.name]}</h1></div>
   );
 }
