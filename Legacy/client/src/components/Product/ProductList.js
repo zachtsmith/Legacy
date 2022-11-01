@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Table } from "reactstrap";
+import { getAllCarriers } from "../../modules/carrierManager";
 import { getAllProducts } from "../../modules/productManager";
 import { Product } from "./Product";
 
-export const ProductList = ({ isBroker }) => {
+export const ProductList = ({ isBroker, user }) => {
     const navigate = useNavigate()
     const [products, setProducts] = useState([]);
+    const [carrier, setCarriers] = useState([]);
 
     const getProducts = () => {
         getAllProducts().then(products => setProducts(products));
@@ -15,6 +17,16 @@ export const ProductList = ({ isBroker }) => {
     useEffect(() => {
         getProducts();
     }, []);
+
+    
+    const getCarriers = () => {
+        getAllCarriers().then(carriers => setCarriers(carriers));
+    };
+
+    useEffect(() => {
+        getCarriers();
+    }, []);
+
 
     return (
         <div className="container">
@@ -32,10 +44,10 @@ export const ProductList = ({ isBroker }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody className="white-text">
-                        {products.map((prod) => (
-                            <Product product={prod} key={prod.id} isBroker={isBroker} />
-                            ))}
+                    <tbody className="white-text">{carrier.map((car) => {if (car.userProfileCarrier.userId === user.id)
+                        { return products.map((prod) => {if (prod.carrierId === car.id){
+                            return <Product product={prod} key={prod.id} isBroker={isBroker} />}
+                        })}})}
                     </tbody>
                             </Table> 
             </div>

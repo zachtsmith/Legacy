@@ -5,7 +5,7 @@ import { getAllCarriers } from "../../modules/carrierManager"
 import { addProduct } from "../../modules/productManager"
 
 
-export const ProductForm = ({ }) => {
+export const ProductForm = ({ user }) => {
     const navigate = useNavigate()
     
     
@@ -61,10 +61,9 @@ export const ProductForm = ({ }) => {
                                 }
                             } ><option value={0}> Select Carrier </option>
                                 {carriers.map(
-                                    (carrier, index) => {
-                                        return (<option value={carrier.id} key={index}
-                                        >{carrier?.name}</option>
-                                        )
+                                    (carrier, index) => { if (user.id === carrier.userProfileCarrier.userId){
+                                        return (<option value={carrier.id} key={index}>{carrier?.name}</option>)
+                                    }
                                     })}
         
                             </select>

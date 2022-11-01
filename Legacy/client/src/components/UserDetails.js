@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Row } from "reactstrap"
+import { Button, Card, CardBody, CardGroup, CardImg, CardText, CardTitle, Col, Row } from "reactstrap"
 import { getUserProfile } from "../modules/userProfileManager"
 
 export const UserDetails = () => {
@@ -22,7 +22,7 @@ export const UserDetails = () => {
 
         <Card key={user?.id} style={{ width: '18rem' }}>
             <Row >
-                <Col >
+                <CardGroup >
                     <CardImg top width="50%" src={user?.imageLocation} alt="Card image cap" />
                     <CardBody>
                         <CardTitle><strong>Name:</strong></CardTitle>
@@ -33,7 +33,7 @@ export const UserDetails = () => {
                         <CardText>{user?.age}</CardText>
 
                     </CardBody>
-                </Col>
+                </CardGroup>
             </Row>
         </Card>
     </>

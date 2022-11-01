@@ -44,9 +44,9 @@ export default function ApplicationViews({ isLoggedIn, isBroker, user }) {
           <Route path="carrier/:carrierId" element={isLoggedIn ? <CarrierEdit /> : <Navigate to="/login" />} />
           <Route path="carrier/delete/:carrierId" element={isLoggedIn ? <CarrierDelete /> : <Navigate to="/login" />} />
 
-          <Route path="product" element={isLoggedIn ? <ProductList isBroker={isBroker}/> : <Navigate to="/login" />} />
+          <Route path="product" element={isLoggedIn ? <ProductList isBroker={isBroker} user={user}/> : <Navigate to="/login" />} />
           <Route path="product/details/:productId" element={isLoggedIn ? <ProductDetails /> : <Navigate to="/login" />} />
-          <Route path="product/create" element={isLoggedIn ? <ProductForm /> : <Navigate to="/login" />} />
+          <Route path="product/create" element={isLoggedIn ? <ProductForm user={user}/> : <Navigate to="/login" />} />
           <Route path="product/:productId" element={isLoggedIn ? <ProductEdit /> : <Navigate to="/login" />} />
           <Route path="product/delete/:productId" element={isLoggedIn ? <ProductDelete /> : <Navigate to="/login" />} />
 
