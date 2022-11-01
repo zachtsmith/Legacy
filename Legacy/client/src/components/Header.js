@@ -97,10 +97,6 @@ export default function Header({ isLoggedIn, isBroker, user }) {
             }
           </Nav>
         </Collapse>
-        {/* <NavItem>{isLoggedIn ?
-        <span className='white-text-end'  style={{ width:"700px" }}>Logged in as {user.name}</span> : ""}
-        </NavItem> */}
-        
       </Navbar>
     </div>
   );
