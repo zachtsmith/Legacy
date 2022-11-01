@@ -22,7 +22,7 @@ export const CarrierDelete = () => {
 
     
     return <>
-        <h2 className="white-text">Are you sure you want to delete {carrier.name} from your list of Carriers?</h2>
+        <h3 className="white-text-only">Are you sure you want to delete {carrier.name} from your list of Carriers?</h3>
         <Button style={{marginLeft: '3px'}} 
         // className="btn-outline-primary" 
         onClick={() => {

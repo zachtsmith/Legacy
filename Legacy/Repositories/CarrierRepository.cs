@@ -169,8 +169,8 @@ namespace Legacy.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Carrier
-                                       WHERE Id = @id";
+                    cmd.CommandText = @"DELETE FROM UserProfileCarriers
+                                       WHERE CarrierId = @id";
 
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();

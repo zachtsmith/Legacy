@@ -20,7 +20,7 @@ export const UserDetails = () => {
     )
     return <>
 
-        <Card key={user?.id} style={{ width: '18rem' }}>
+        <Card key={user?.id} style={{ width: '16rem' }}>
             <Row >
                 <CardGroup >
                     <CardImg top width="50%" src={user?.imageLocation} alt="Card image cap" />
