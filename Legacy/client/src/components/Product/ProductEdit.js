@@ -4,7 +4,7 @@ import { Button, Card, CardBody, Form, FormGroup, Input, Label } from "reactstra
 import { getAllCarriers } from "../../modules/carrierManager"
 import { getProduct } from "../../modules/productManager"
 
-export const ProductEdit = ({ }) => {
+export const ProductEdit = ({ user }) => {
     const navigate = useNavigate()
     const { productId } = useParams()
     const [carriers, setCarriers] = useState([]);
@@ -14,7 +14,14 @@ export const ProductEdit = ({ }) => {
         productName: "",
         productType: "",
         length: "",
-        benefitAmount: 0
+        benefitAmount: 0,
+        carrier: {
+            id: 0,
+            name: "",
+            phoneNumber: 0,
+            address: "",
+            logoUrl: ""
+        }
     })
 
 
@@ -72,12 +79,13 @@ export const ProductEdit = ({ }) => {
                                     copy.carrierId = parseInt(evt.target.value)
                                     setProduct(copy)
                                 }
-                            } ><option value={0}> Select Carrier </option>
-                                {carriers.map(
-                                    (carrier, index) => {
+                            } ><option value={0}
+                            > {product.carrier.name} </option>
+                                {carriers.map( 
+                                    (carrier, index) => { if(carrier.userProfileCarrier.userId === user.id){
                                         return (<option value={carrier.id} key={index}
                                         >{carrier?.name}</option>
-                                        )
+                                        )}
                                     })}
         
                             </select>

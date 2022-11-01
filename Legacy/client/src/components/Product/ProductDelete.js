@@ -21,7 +21,7 @@ export const ProductDelete = () => {
 
     
     return <>
-        <h2>Are you sure you want to delete {product.productName} from your list of Products?</h2>
+        <h3 className="white-text-only">Are you sure you want to delete {product.productName} from your list of Products?</h3>
         <Button style={{marginLeft: '3px'}} 
         // className="btn-outline-primary" 
         onClick={() => {

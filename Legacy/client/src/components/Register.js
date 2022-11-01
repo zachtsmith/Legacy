@@ -45,7 +45,7 @@ useEffect(() => {
 
   return (<div className="center">
 
-    <Form onSubmit={registerClick}>
+    <Form onSubmit={registerClick} className="white-text">
       <fieldset>
         <FormGroup>
           <Label htmlFor="Name" className="white-text-3">Name</Label>
