@@ -18,7 +18,8 @@ namespace Legacy.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT c.Id, c.Name, c.PhoneNumber, c.Address, c.LogoUrl, upc.Id as UPCid,                              upc.CarrierId, upc.UserId
+                    cmd.CommandText = @"SELECT c.Id, c.Name, c.PhoneNumber, c.Address, c.LogoUrl, upc.Id as UPCid,                             
+                                        upc.CarrierId, upc.UserId
                                         FROM Carrier c
                                         Left JOIN UserProfileCarriers  upc ON c.Id = upc.CarrierId
                                         Order by c.Name

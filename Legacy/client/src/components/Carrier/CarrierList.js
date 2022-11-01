@@ -10,22 +10,9 @@ import { getUserProfile } from "../../modules/userProfileManager";
 
 export const CarrierList = ({ isBroker, user }) => {
     const navigate = useNavigate()
-    // const { profileId } = useParams()
+    
     const [carrier, setCarriers] = useState([]);
     
-    // const [user, setUser] = useState()
-    // const getUser = () => {
-    //     getUserProfile(profileId).then((u) => setUser(u))
-    // }
-
-    // useEffect(
-    //     () => {
-    //         getUser()
-    //     },
-    //     []
-    // )
-   
-
     const getCarriers = () => {
         getAllCarriers().then(carriers => setCarriers(carriers));
     };

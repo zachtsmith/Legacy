@@ -27,7 +27,8 @@ export default function Hello() {
     });
   }, [])
 
-  return (
-    <div className="center-1" ><h1>Hello {[...userProfile.name]}</h1></div>
-  );
+ 
+    return ( 
+      <div className="center-1" ><h1>Hello {userProfile.name}</h1></div>
+      );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { CardGroup } from "reactstrap";
 import { getUserProfiles } from "../modules/userProfileManager";
 import { User } from "./User";
 
