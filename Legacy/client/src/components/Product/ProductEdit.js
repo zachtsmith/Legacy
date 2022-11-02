@@ -66,7 +66,8 @@ export const ProductEdit = ({ user }) => {
 
                 <Form className="ProductForm">
                     <FormGroup>
-                        <Label for="name">Product</Label>
+                        <Label for="name"><h2>Edit Product</h2></Label>
+                        <div><Label for="carrierName"><strong>Carrier</strong></Label></div>
                         <div>
                         <select
                             id="product"
@@ -90,6 +91,7 @@ export const ProductEdit = ({ user }) => {
         
                             </select>
                             </div>
+                            <Label for="name"><strong>Name</strong></Label>
                         <Input
                             id="product"
                             name="product"
@@ -103,6 +105,7 @@ export const ProductEdit = ({ user }) => {
                                     setProduct(copy)
                                 }
                             } />
+                            <Label for="productType"><strong>Type</strong></Label>
                             <Input
                             id="product"
                             name="product"
@@ -116,6 +119,7 @@ export const ProductEdit = ({ user }) => {
                                     setProduct(copy)
                                 }
                             } />
+                            <Label for="length"><strong>Length</strong></Label>
                             <Input
                             id="product"
                             name="product"
@@ -129,6 +133,7 @@ export const ProductEdit = ({ user }) => {
                                     setProduct(copy)
                                 }
                             } />
+                            <Label for="benefitAmount"><strong>Benefit Amount</strong></Label>
                             <Input
                             id="product"
                             name="product"
@@ -144,7 +149,7 @@ export const ProductEdit = ({ user }) => {
                             } />
 
                     </FormGroup>
-                    <Button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+                    <Button style={{marginBottom: '6px'}} onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                         className="btn btn-primary">
                         Save
                     </Button>

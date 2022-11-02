@@ -44,13 +44,20 @@ export const ProductList = ({ isBroker, user }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody className="white-text">{carrier.map((car) => {if (car.userProfileCarrier.userId === user.id)
-                        { return products.map((prod) => {if (prod.carrierId === car.id){
+                    
+                    <tbody className="white-text">
+                    {isBroker === true ? 
+                    products.map((prod) => {if (prod.userProfileProduct.userId === user.id){ 
                             return <Product product={prod} key={prod.id} isBroker={isBroker} />}
-                        })}})}
+                    }) 
+                :
+                products.map((prod) => { 
+                    return <Product product={prod} key={prod.id} isBroker={isBroker} />}
+            )}
                     </tbody>
                             </Table> 
             </div>
         </div>
     );
 }
+

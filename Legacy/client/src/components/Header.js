@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import { logout } from '../modules/authManager';
 import img1 from "../images/legacyLogo.png"
+import img2 from "../images/legacyLogo2.png"
 import { getCurrentUserByFirebaseId } from '../modules/userProfileManager';
 
 
@@ -40,8 +41,8 @@ export default function Header({ isLoggedIn, isBroker, user }) {
 
   return (
     <div>
-      <Navbar  color="dark" light expand="md" width="100%">
-        <NavbarBrand   height={100} tag={RRNavLink} to="/"><img src={img1} alt="logoLegacy" height={"100px"} width={"200px"} /></NavbarBrand>
+      <Navbar  color="black" light expand="md" width="100%">
+        <NavbarBrand   height={100} tag={RRNavLink} to="/"><img src={img2} alt="logoLegacy" height={"110px"} width={"200px"} /></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -97,10 +98,6 @@ export default function Header({ isLoggedIn, isBroker, user }) {
             }
           </Nav>
         </Collapse>
-        {/* <NavItem>{isLoggedIn ?
-        <span className='white-text-end'  style={{ width:"700px" }}>Logged in as {user.name}</span> : ""}
-        </NavItem> */}
-        
       </Navbar>
     </div>
   );

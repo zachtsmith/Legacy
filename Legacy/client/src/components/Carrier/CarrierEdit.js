@@ -48,7 +48,7 @@ export const CarrierEdit = ({ }) => {
 
                 <Form className="carrierForm">
                     <FormGroup>
-                        <Label for="name">Carrier</Label>
+                        <Label for="name"><strong>Carrier</strong></Label>
                         <Input
                             id="carrier"
                             name="carrier"
@@ -62,6 +62,7 @@ export const CarrierEdit = ({ }) => {
                                     setCarrier(copy)
                                 }
                             } />
+                            <Label for="phoneNumber"><strong>Phone Number</strong></Label>
                             <Input
                             id="carrier"
                             name="carrier"
@@ -75,6 +76,7 @@ export const CarrierEdit = ({ }) => {
                                     setCarrier(copy)
                                 }
                             } />
+                            <Label for="address"><strong>Address</strong></Label>
                             <Input
                             id="carrier"
                             name="carrier"
@@ -88,14 +90,28 @@ export const CarrierEdit = ({ }) => {
                                     setCarrier(copy)
                                 }
                             } />
+                            <Label for="logoUrl"><strong>Carrier Logo</strong></Label>
+                            <Input
+                            id="carrier"
+                            name="carrier"
+                            type="text"
+                            style={{marginBottom: '6px'}}
+                            value={carrier.logoUrl}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...carrier }
+                                    copy.logoUrl = evt.target.value
+                                    setCarrier(copy)
+                                }
+                            } />
 
                     </FormGroup>
-                    <Button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+                    <Button style={{marginBottom: '6px'}} onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                         className="btn btn-primary">
                         Save
                     </Button>
                 </Form>
-                <Button onClick={() => navigate("/carrier")}>Cancel</Button>
+                <Button style={{marginBottom: '6px'}} onClick={() => navigate("/carrier")}>Cancel</Button>
             </CardBody>
         </Card>
     </>

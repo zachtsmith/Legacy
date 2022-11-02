@@ -1,3 +1,6 @@
+using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
+
 namespace Legacy.Models
 {
     public class Product 
@@ -9,6 +12,9 @@ namespace Legacy.Models
         public string Length { get; set; }
         public int BenefitAmount { get; set; }
         public Carrier Carrier { get; set; }
+        public UserProfileProduct UserProfileProduct { get; set; }
+        public List<UserProfileProduct> UserProfileProducts { get; set; }
+         
 
     }
 }

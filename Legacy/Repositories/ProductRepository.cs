@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Legacy.Models;
 using Legacy.Utils;
 using Legacy.Repositories;
+using System.Threading;
 
 namespace Legacy.Repositories
 {
@@ -18,10 +19,11 @@ namespace Legacy.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT p.Id as ProductId, p.CarrierId as ProdCarrId, p.ProductName, p.ProductType, p.Length, p.BenefitAmount, c.Id AS CarrierId, c.Name as CarrierName, c.PhoneNumber, c.Address, c.logoUrl
+                    cmd.CommandText = @"SELECT p.Id as ProductId, p.CarrierId as ProdCarrId, p.ProductName, p.ProductType, p.Length, p.BenefitAmount, c.Id AS CarrierId, c.Name as CarrierName, c.PhoneNumber, c.Address, c.logoUrl, upp.Id as UPPid, upp.UserId, upp.ProductId as UPPproductId
                         FROM Product p 
                         Left JOIN Carrier c ON p.CarrierId = c.Id
-                                        ORDER BY c.Name";
+                        Left Join UserProfileProduct upp ON p.Id = upp.ProductId
+                                        ORDER BY p.Id";
                     var reader = cmd.ExecuteReader();
 
                     var products = new List<Product>();
@@ -43,7 +45,13 @@ namespace Legacy.Repositories
                             ProductName = DbUtils.GetString(reader, "ProductName"),
                             ProductType = DbUtils.GetString(reader, "ProductType"),
                             Length = DbUtils.GetString(reader, "Length"),
-                            BenefitAmount = DbUtils.GetInt(reader, "BenefitAmount")
+                            BenefitAmount = DbUtils.GetInt(reader, "BenefitAmount"),
+                            UserProfileProduct = new UserProfileProduct()
+                            {
+                                Id = DbUtils.GetNullableInt(reader, "UPPid"),
+                                UserId = DbUtils.GetNullableInt(reader, "UserId"),
+                                ProductId = DbUtils.GetNullableInt(reader, "UPPproductId")
+                            }
 
                         });
                     }
@@ -55,6 +63,7 @@ namespace Legacy.Repositories
             }
         }
 
+        
         public Product GetProductById(int id)
         {
             using (SqlConnection conn = Connection)
@@ -103,7 +112,6 @@ namespace Legacy.Repositories
                 }
             }
         }
-
         public void UpdateProduct(Product product)
         {
             using (SqlConnection conn = Connection)
@@ -147,6 +155,7 @@ namespace Legacy.Repositories
                     OUTPUT INSERTED.Id
                     VALUES (@carrierId, @productName, @productType, @length, @benefitAmount)";
                     DbUtils.AddParameter(cmd, "@carrierId", product.CarrierId);
+                    DbUtils.AddParameter(cmd, "@id", product.Id);
                     DbUtils.AddParameter(cmd, "@productName", product.ProductName);
                     DbUtils.AddParameter(cmd, "@productType", product.ProductType);
                     DbUtils.AddParameter(cmd, "@length", product.Length);
@@ -154,6 +163,20 @@ namespace Legacy.Repositories
 
                     int newlyCreatedId = (int)cmd.ExecuteScalar();
                     product.Id = newlyCreatedId;
+
+                    cmd.CommandText = @"
+                    INSERT INTO UserProfileProduct (UserId, ProductId)
+                    OUTPUT INSERTED.Id
+                    VALUES (@userId, @productId)"
+                    ;
+
+                    DbUtils.AddParameter(cmd, "@userProfileProductId", product.UserProfileProduct.Id);
+                    DbUtils.AddParameter(cmd, "@userId", product.UserProfileProduct.UserId);
+                    DbUtils.AddParameter(cmd, "@productId", product.Id);
+
+
+                    int newlyCreatedUserProfileProductId = (int)cmd.ExecuteScalar();
+                    product.UserProfileProduct.Id = newlyCreatedUserProfileProductId;
                 }
             }
         }
@@ -165,8 +188,8 @@ namespace Legacy.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Product
-                                       WHERE Id = @id";
+                    cmd.CommandText = @"DELETE FROM UserProfileProduct
+                                       WHERE ProductId = @id";
 
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();

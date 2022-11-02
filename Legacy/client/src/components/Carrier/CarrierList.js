@@ -36,11 +36,15 @@ export const CarrierList = ({ isBroker, user }) => {
                         </tr>
                     </thead>
                     <tbody className="white-text"> 
-                    
-                        {carrier.map((car) => {if (car.userProfileCarrier.userId === user.id) {
-
+                    {isBroker === true ? 
+                        carrier.map((car) => {if (car.userProfileCarrier.userId === user.id) {
                             return <><Carrier carrier={car} key={car.userProfileCarrier.id} isBroker={isBroker} /></>
-                        }})}
+                        }}) 
+                        
+                        : 
+                        carrier.map((car) =>  {
+                            return <><Carrier carrier={car} key={car.userProfileCarrier.id} isBroker={isBroker} /></>
+                        }) }
                     </tbody>
                 </Table>{isBroker === true ?
                 <Button onClick={() => navigate("/carrier/create")}>Add new Carrier</Button> : ""}
