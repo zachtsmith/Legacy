@@ -63,6 +63,7 @@ namespace Legacy.Repositories
             }
         }
 
+        
         public Product GetProductById(int id)
         {
             using (SqlConnection conn = Connection)
@@ -72,10 +73,9 @@ namespace Legacy.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                      SELECT p.Id as ProductId, p.CarrierId as ProdCarrId, p.ProductName, p.ProductType, p.Length, p.BenefitAmount, c.Id AS CarrierId, c.Name as CarrierName, c.PhoneNumber, c.Address, c.logoUrl, upp.Id as UPPid, upp.UserId, upp.ProductId as UPPproductId
+                       SELECT p.Id as ProductId, p.CarrierId as ProdCarrId, p.ProductName, p.ProductType, p.Length, p.BenefitAmount, c.Id AS CarrierId, c.Name as CarrierName, c.PhoneNumber, c.Address, c.logoUrl
                         FROM Product p 
                         Left JOIN Carrier c ON p.CarrierId = c.Id
-                        Left Join UserProfileProduct upp ON p.Id = upp.ProductId
                                      WHERE p.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
@@ -100,12 +100,6 @@ namespace Legacy.Repositories
                                     Address = DbUtils.GetString(reader, "Address"),
                                     LogoUrl = DbUtils.GetString(reader, "LogoUrl")
                                 },
-                                UserProfileProduct = new UserProfileProduct()
-                                {
-                                    Id = DbUtils.GetNullableInt(reader, "UPPid"),
-                                    UserId = DbUtils.GetNullableInt(reader, "UserId"),
-                                    ProductId = DbUtils.GetNullableInt(reader, "UPPproductId")
-                                },
                             };
 
                             return product;
@@ -118,7 +112,6 @@ namespace Legacy.Repositories
                 }
             }
         }
-
         public void UpdateProduct(Product product)
         {
             using (SqlConnection conn = Connection)
@@ -162,6 +155,7 @@ namespace Legacy.Repositories
                     OUTPUT INSERTED.Id
                     VALUES (@carrierId, @productName, @productType, @length, @benefitAmount)";
                     DbUtils.AddParameter(cmd, "@carrierId", product.CarrierId);
+                    DbUtils.AddParameter(cmd, "@id", product.Id);
                     DbUtils.AddParameter(cmd, "@productName", product.ProductName);
                     DbUtils.AddParameter(cmd, "@productType", product.ProductType);
                     DbUtils.AddParameter(cmd, "@length", product.Length);

@@ -19,9 +19,10 @@ namespace Legacy.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT c.Id, c.Name, c.PhoneNumber, c.Address, c.LogoUrl, upc.Id as UPCid,                             
-                                        upc.CarrierId, upc.UserId
+                                        upc.CarrierId, upc.UserId, up.Id as UPid, up.Name as UPname, up.FirebaseUserId, up.UserType, up.Weight, up.Age, up. IsDiabetic, up.IsSmoker, up.Medications, up.Email, up.UserTypeId, up.ImageLocation
                                         FROM Carrier c
                                         Left JOIN UserProfileCarriers  upc ON c.Id = upc.CarrierId
+                                        Left Join UserProfiles up ON upc.UserId = up.Id 
                                         Order by c.Name
                                        ";
                   
@@ -44,6 +45,7 @@ namespace Legacy.Repositories
                                 UserId = DbUtils.GetNullableInt(reader, "UserId"),
                                 CarrierId = DbUtils.GetNullableInt(reader, "CarrierId")
                             }
+                         
 
                         });
                     }

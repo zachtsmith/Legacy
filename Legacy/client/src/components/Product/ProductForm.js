@@ -15,7 +15,19 @@ export const ProductForm = ({ user }) => {
         productName: "",
         productType: "",
         length: "",
-        benefitAmount: ""
+        benefitAmount: "",
+        carrier: {
+            id: 0,
+            name: "",
+            phoneNumber: "",
+            address: "",
+            logoUrl: "",
+        },
+        userProfileProduct: {
+            id: 0,
+            userId: user.id,
+            productId: 0
+        }
     })
     
     const [carriers, setCarriers] = useState([]);
@@ -61,7 +73,7 @@ export const ProductForm = ({ user }) => {
                                 }
                             } ><option value={0}> Select Carrier </option>
                                 {carriers.map(
-                                    (carrier, index) => { if (user.id === carrier.userProfileCarrier.userId){
+                                    (carrier, index) => { if (carrier.userProfileCarrier.userId === user.id ){
                                         return (<option value={carrier.id} key={index}>{carrier?.name}</option>)
                                     }
                                     })}

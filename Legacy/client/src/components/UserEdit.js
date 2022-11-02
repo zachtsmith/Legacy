@@ -129,12 +129,12 @@ export const UserEdit = ({ }) => {
                         name="userHealth"
                         type="text"
                         placeholder="Weight"
-                        value={userProfile.weight}
+                        value={userProfile.isSmoker}
                         style={{marginBottom: '6px'}}
                         onChange={
                             (evt) => {
                                 const copy = { ...userProfile }
-                                copy.weight = evt.target.value
+                                copy.isSmoker = evt.target.value
                                 setUserProfile(copy)
                                 }
                             } />

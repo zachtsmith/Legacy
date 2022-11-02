@@ -13,9 +13,9 @@ export const Carrier = ({ carrier, isBroker }) => {
     </>}
     else {
         return <>
-        <tr>
+        <tr className="white-text">
             <td>{carrier?.name}</td>
-            <td><Link to={`/carrier/details/${carrier.id}`}>Contact Info</Link></td>
+            <td><Link className="white-text" to={`/carrier/details/${carrier.id}`}>Contact Info</Link></td>
         </tr>
     </>
     }
