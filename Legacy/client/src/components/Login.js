@@ -22,7 +22,7 @@ export default function Login() {
     <Form onSubmit={loginSubmit} >
       <fieldset >
         <FormGroup >
-          <Label for="email" className="white-text">Email</Label>
+          <Label for="email" className="white-text-header">Email</Label>
           <Input
           style={{ width:"300px" }}
           id="email"
@@ -32,7 +32,7 @@ export default function Login() {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="password" className="white-text">Password</Label>
+          <Label for="password" className="white-text-header">Password</Label>
           <Input
           style={{ width:"300px" }}
           id="password"
@@ -41,7 +41,7 @@ export default function Login() {
           />
         </FormGroup>
         <FormGroup>
-          <Button>Login</Button>
+          <Button style={{ marginLeft: "auto", marginTop: "6px", backgroundColor:"white", color:"goldenrod" }} className="addNewProductButton">Login</Button>
         </FormGroup>
         <em className="white-text-2">
           Not registered? <Link to="../register">Register</Link>

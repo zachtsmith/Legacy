@@ -14,11 +14,12 @@ export const ClientProfiles = ({ isBroker }) => {
     }, []);
 
     return <>
+    <CardGroup>
         {
             userProfiles?.map((up) => {if (up.userType === "Client"){
                 return <User userProfile={up} key={up.id} isBroker={isBroker}/>}
             })}
-
+            </CardGroup>
     </>
 }
 
@@ -33,10 +34,12 @@ export const BrokerProfiles = ({isBroker}) => {
     }, []);
 
     return <>
+       <CardGroup>
         {
             userProfiles?.map((up) => {if (up.userType === "Broker"){
                 return <User userProfile={up} key={up.id} isBroker={isBroker}/>}
             })}
+            </CardGroup> 
 
     </>
 }

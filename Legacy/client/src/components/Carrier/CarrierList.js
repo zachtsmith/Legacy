@@ -47,7 +47,7 @@ export const CarrierList = ({ isBroker, user }) => {
                         }) }
                     </tbody>
                 </Table>{isBroker === true ?
-                <Button onClick={() => navigate("/carrier/create")}>Add new Carrier</Button> : ""}
+                <Button style={{ marginLeft: "auto", marginTop: "6px", backgroundColor:"white", color:"goldenrod" }} className="addNewProductButton" onClick={() => navigate("/carrier/create")}>ADD NEW CARRIER</Button> : ""}
             </div>
         </div>
         </div>

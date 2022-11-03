@@ -6,11 +6,12 @@ export const User = ({ userProfile, isBroker }) => {
     const navigate = useNavigate()
 
     return <>
-  <CardGroup >
-    <Container>
+ 
+
+
 
         <Card key={userProfile.id} style={{ width: '15rem' }}>
-                    <CardImg top width="50%" height="" src={userProfile?.imageLocation} alt="Card image cap" />
+                    <CardImg top width="50%" height="300px" src={userProfile?.imageLocation} alt="Card image cap" />
                     <CardBody>
                         <CardTitle><strong><h3>{userProfile?.name}</h3></strong></CardTitle>
                         <CardTitle><strong>Email:</strong></CardTitle>
@@ -20,9 +21,11 @@ export const User = ({ userProfile, isBroker }) => {
                     }                 
                     </CardBody>
         </Card>
+    
+                    
+                    
 
-    </Container>
-                    </CardGroup>
+    
                     
     </>
 }

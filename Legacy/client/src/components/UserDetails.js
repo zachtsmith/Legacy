@@ -20,9 +20,11 @@ export const UserDetails = () => {
     )
     return <>
 
-        <Card key={user?.id} style={{ width: '16rem' }}>
+        <Card key={user?.id} style={{ width: '16rem'}} className="card-details">
             <Row >
+
                 <CardGroup >
+            
                     <CardImg top width="50%" src={user?.imageLocation} alt="Card image cap" />
                     <CardBody>
                         <CardTitle><strong>Name:</strong></CardTitle>
@@ -33,6 +35,7 @@ export const UserDetails = () => {
                         <CardText>{user?.age}</CardText>
 
                     </CardBody>
+            
                 </CardGroup>
             </Row>
         </Card>

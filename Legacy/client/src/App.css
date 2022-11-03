@@ -84,14 +84,51 @@ body, html {
 
 .center-1 {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start ;
+  /* align-items: center; */
   height:100vh;  
   color: white;
-  font-size:larger
+  font-size:larger;
+  font-style: italic;
+  padding: 10px;
 }
 
 .white-text-only {
   color: white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.center-2 {
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+  height:100vh;  
+  color: white;
+  font-style: italic;
+  padding: 10px;
+}
+
+.white-text-header {
+  color: white;
+  font-size: large;
+  font-style: italic;
+
+}
+
+.card-details {
+  justify-content: center;
+}
+
+.bold{
+  font-weight:500;
+}
+
+.addNewProductButton {
+  background-color: white;
+  color: goldenrod ;
+}
+
+.yellow-text {
+  color: burlywood;
+  font-size: large;
 }

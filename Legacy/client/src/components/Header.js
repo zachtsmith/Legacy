@@ -14,6 +14,7 @@ import { logout } from '../modules/authManager';
 import img1 from "../images/legacyLogo.png"
 import img2 from "../images/legacyLogo2.png"
 import { getCurrentUserByFirebaseId } from '../modules/userProfileManager';
+import '../App.css';
 
 
 export default function Header({ isLoggedIn, isBroker, user }) {
@@ -49,27 +50,24 @@ export default function Header({ isLoggedIn, isBroker, user }) {
             { /* When isLoggedIn === true, we will render the Home link */}
             {isLoggedIn &&
             <>
-           
               <NavItem>
-                <NavLink tag={RRNavLink} to="/"><span className="white-text">Home</span></NavLink>
+                <NavLink tag={RRNavLink} to="/"><span className="white-text-header">Home</span></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={RRNavLink} to="/carrier"><span className="white-text">Carriers</span></NavLink>
+                <NavLink tag={RRNavLink} to="/carrier"><span className="white-text-header">Carriers</span></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={RRNavLink} to="/product"><span className="white-text">All Products</span></NavLink>
+                <NavLink tag={RRNavLink} to="/product"><span className="white-text-header">All Products</span></NavLink>
               </NavItem>
               <NavItem>
               {isBroker === true ?
-                <NavLink tag={RRNavLink} to="/profiles"><span className="white-text">Clients</span></NavLink>
-              : <NavLink tag={RRNavLink} to="/profiles"><span className="white-text">Brokers</span></NavLink> }
+                <NavLink tag={RRNavLink} to="/profiles"><span className="white-text-header">Clients</span></NavLink>
+              : <NavLink tag={RRNavLink} to="/profiles"><span className="white-text-header">Brokers</span></NavLink> }
               </NavItem>
               <NavItem>
                 {isBroker === true ? "" :
-                <NavLink tag={RRNavLink} to="/profiles/health"><span className="white-text">HealthForm</span></NavLink>}
+                <NavLink tag={RRNavLink} to="/profiles/health"><span className="white-text-header">HealthForm</span></NavLink>}
               </NavItem>
-              
-              
               </>
             }
           </Nav>
@@ -78,27 +76,24 @@ export default function Header({ isLoggedIn, isBroker, user }) {
               <>
                 <NavItem>
                   <a aria-current="page" className="nav-link"
-                    style={{ cursor: "pointer" }} onClick={logout}><span className="white-text">Logout</span></a>
-                </NavItem>
-                
-                
+                    style={{ cursor: "pointer" }} onClick={logout}><span className="white-text-header">Logout</span></a>
+                </NavItem> 
               </>
-                  
-            }
+                }
             {!isLoggedIn &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/login"><span className="white-text">Login</span></NavLink>
+                  <NavLink tag={RRNavLink} to="/login"><span className="white-text-header">Login</span></NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/register"><span className="white-text">Register</span></NavLink>
+                  <NavLink tag={RRNavLink} to="/register"><span className="white-text-header">Register</span></NavLink>
                 </NavItem>
-
               </>
             }
           </Nav>
         </Collapse>
-      </Navbar>
+        {/* {isLoggedIn && <NavbarText className="me-auto"><div className='white-text-end'>Logged in as: {{...userProfile.name}}</div></NavbarText>} */}
+      </Navbar> 
     </div>
   );
 }

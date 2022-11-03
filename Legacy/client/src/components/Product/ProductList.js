@@ -34,7 +34,7 @@ export const ProductList = ({ isBroker, user }) => {
                 <div style={{ display: 'flex' }} className="white-text"><h3>List of Products</h3>
                 
                 {isBroker === true ?
-                            <Button  style={{ marginLeft: "auto" }} onClick={() => navigate("/product/create")}>Add new Product</Button> : ""}
+                            <Button  style={{ marginLeft: "auto", marginTop: "6px", backgroundColor:"white", color:"goldenrod" }} className="addNewProductButton" onClick={() => navigate("/product/create")}>ADD NEW PRODUCT</Button> : ""}
                 </div>
                 <Table className="white-text">
                     <thead>
